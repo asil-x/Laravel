@@ -50,6 +50,17 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+
+    adminer:
+        image: adminer
+        ports:
+            - 8080:8080
+        environment:
+            - ADMINER_DEFAULT_DRIVER=mysql
+            - ADMINER_DEFAULT_SERVER=mysql
+        networks:
+            - sail
+
     redis:
         image: 'redis:alpine'
         ports:
@@ -91,6 +102,7 @@ services:
             - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
+
 networks:
     sail:
         driver: bridge
