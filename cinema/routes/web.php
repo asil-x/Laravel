@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DistributorController;
+use App\Http\Controllers\GenereController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('movies', MovieController::class);
     Route::resource('distributors', DistributorController::class);
-
+    Route::resource('genere', GenereController::class);
 
 });
 

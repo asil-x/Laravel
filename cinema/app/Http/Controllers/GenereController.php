@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Type\CreateTypeRequest;
+use App\Http\Requests\Type\UpdateTypeRequest;
+use App\Models\Movie;
+use App\Models\MovieType;
 
 class GenereController extends Controller
 {
@@ -11,7 +14,9 @@ class GenereController extends Controller
      */
     public function index()
     {
-        //
+        $generes = MovieType::query()->paginate(10);
+
+        return view('genere.index', compact('generes'));
     }
 
     /**
@@ -19,15 +24,21 @@ class GenereController extends Controller
      */
     public function create()
     {
-        //
+        return view('genere.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateTypeRequest $request)
     {
-        //
+        $body = $request->all();
+
+        $genere = MovieType::create([
+            'nom' => $body['nom'],
+        ]);
+
+        return redirect()->route('genere.show', $genere);
     }
 
     /**
@@ -35,7 +46,10 @@ class GenereController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $genere = MovieType::query()->findOrFail($id);
+        $movies = Movie::query()->where('id_genre', $genere->id_genere)->get();
+
+        return view('genere.show', compact('genere', 'movies'));
     }
 
     /**
@@ -43,15 +57,24 @@ class GenereController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $genere = MovieType::query()->findOrFail($id);
+
+        return view('genere.edit', compact('genere'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTypeRequest $request, string $id)
     {
-        //
+        $body = $request->all();
+
+        $genere = MovieType::query()->findOrFail($id);
+        $genere->update([
+            'nom' => $body['nom'],
+        ]);
+
+        return redirect()->route('genere.index', $genere);
     }
 
     /**
@@ -59,6 +82,9 @@ class GenereController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $genere = MovieType::query()->findOrFail($id);
+        $genere->delete();
+
+        return redirect()->route('genere.index');
     }
 }

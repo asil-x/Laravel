@@ -21,12 +21,12 @@
                     <x-nav-link :href="route('distributors.index')" :active="request()->routeIs('distributors.index')">
                         {{ __('Distributors') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('movies.index')" :active="request()->routeIs('types.index')">
-                        {{ __('Types') }}
+                    <x-nav-link :href="route('genere.index')" :active="request()->routeIs('types.index')">
+                        {{ __('Generes') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('movies.index')" :active="request()->routeIs('users.index')">
+                    {{-- <x-nav-link :href="route('movies.index')" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
 
                 </div>
             </div>

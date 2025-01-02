@@ -11,5 +11,9 @@ class MovieType extends Model
 
     protected $primaryKey = 'id_genre';
 
+    protected $fillable = [
+        'nom',
+    ];
+
     public $timestamps = false;
 }
