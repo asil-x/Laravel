@@ -4,6 +4,7 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\GenereController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('distributors', DistributorController::class);
     Route::resource('genere', GenereController::class);
 
+    Route::middleware(['role:admin'])->group(function () {
+        Route::resource('users', UserController::class)->except(['edit', 'update']);
+    });
 });
 
 require __DIR__.'/auth.php';
