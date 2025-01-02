@@ -10,4 +10,10 @@ class MovieType extends Model
     protected $table = 'genres';
 
     protected $primaryKey = 'id_genre';
+
+    protected $fillable = [
+        'nom',
+    ];
+
+    public $timestamps = false;
 }

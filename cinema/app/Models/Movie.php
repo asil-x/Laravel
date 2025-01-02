@@ -23,4 +23,19 @@ class Movie extends Model
     {
         return $this->belongsTo(MovieType::class, 'id_genre');
     }
+
+    protected $fillable = [
+        'id_film',
+        'id_genre',
+        'id_distributeur',
+        'titre',
+        'resum',
+        'date_debut_affiche',
+        'date_fin_affiche',
+        'duree_minutes',
+        'annee_production',
+    ];
+
+    public $timestamps = false;
+
 }

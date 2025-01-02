@@ -15,4 +15,15 @@ class MovieDistributor extends Model
     {
         return $this->hasMany(Movie::class, 'id_distributeur');
     }
+
+    protected $fillable = [
+        'nom',
+        'telephone',
+        'adresse',
+        'cpostal',
+        'ville',
+        'pays',
+    ];
+
+    public $timestamps = false;
 }

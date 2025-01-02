@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Movie\CreateMovieRequest;
+use App\Http\Requests\Movie\UpdateMovieRequest;
 use App\Models\Movie;
+use App\Models\MovieDistributor;
 use App\Models\MovieType;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -72,5 +75,77 @@ class MovieController extends Controller
         }
 
         return view('movie.show', compact('movie', 'recommandations'));
+    }
+
+    public function create()
+    {
+        $types = MovieType::query()->get();
+        $distributors = MovieDistributor::query()->get();
+
+        return view('movie.create', compact('types', 'distributors'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(CreateMovieRequest $request)
+    {
+        $body = $request->all();
+        $movie = Movie::create([
+            'titre' => $body['titre'],
+            'resum' => $body['resum'],
+            'date_debut_affiche' => $body['date_debut_affiche'],
+            'date_fin_affiche' => $body['date_fin_affiche'],
+            'duree_minutes' => $body['duree_minutes'],
+            'annee_production' => $body['annee_production'],
+            'id_genre' => $body['genre'],
+            'id_distributeur' => $body['distributeur'],
+        ]);
+
+        return redirect()->route('movies.show', $movie);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $types = MovieType::query()->get();
+        $distributors = MovieDistributor::query()->get();
+        $movie = Movie::query()->findOrFail($id);
+
+        return view('movie.edit', compact('types', 'distributors', 'movie'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateMovieRequest $request, string $id)
+    {
+        $body = $request->all();
+        $movie = Movie::query()->findOrFail($id);
+        $movie->update([
+            'titre' => $body['titre'],
+            'resum' => $body['resum'],
+            'date_debut_affiche' => $body['date_debut_affiche'],
+            'date_fin_affiche' => $body['date_fin_affiche'],
+            'duree_minutes' => $body['duree_minutes'],
+            'annee_production' => $body['annee_production'],
+            'id_genre' => $body['genre'],
+            'id_distributeur' => $body['distributeur'],
+        ]);
+
+        return redirect()->route('movies.show', $movie);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $movie = Movie::query()->findOrFail($id);
+        $movie->delete();
+
+        return redirect()->route('movies.index');
     }
 }
