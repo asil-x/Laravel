@@ -11,7 +11,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id_genre' => 'nullable|integer',
+            'id_distributeur' => 'nullable|integer',
+            'titre' => 'nullable|string',
+            'resum' => 'nullable|string',
+            'date_debut_affiche' => 'nullable|date',
+            'date_fin_affiche' => 'nullable|date',
+            'duree_minutes' => 'nullable|integer',
+            'annee_production' => 'nullable|integer',
         ];
     }
 }
