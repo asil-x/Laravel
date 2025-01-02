@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateUserRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class CreateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,14 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id_genre' => 'required|integer',
+            'id_distributeur' => 'required|integer',
+            'titre' => 'required|string',
+            'resum' => 'nullable|string',
+            'date_debut_affiche' => 'nullable|date',
+            'date_fin_affiche' => 'nullable|date',
+            'duree_minutes' => 'nullable|integer',
+            'annee_production' => 'nullable|integer',
         ];
     }
 }
