@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('movies.index')" :active="request()->routeIs('movies.index')">
                         {{ __('Films') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('movies.index')" :active="request()->routeIs('distributors.index')">
+                    <x-nav-link :href="route('distributors.index')" :active="request()->routeIs('distributors.index')">
                         {{ __('Distributors') }}
                     </x-nav-link>
                     <x-nav-link :href="route('movies.index')" :active="request()->routeIs('types.index')">

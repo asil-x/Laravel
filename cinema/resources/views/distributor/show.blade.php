@@ -5,7 +5,7 @@
         </a>
     </x-slot>
 
-    <div class="container mx-auto py-8">
+    <div class="container max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <section class="grid grid-cols-[1fr] items-start gap-8">
             <article class="space-y-4 top-8">
                 <h1 class="text-3xl leading-none tracking-tight font-bold">{{ $distributor->nom }}</h1>

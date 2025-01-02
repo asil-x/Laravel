@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('movies', MovieController::class);
-    Route::resource('distributors', DistributorController::class)->only(['show']);
+    Route::resource('distributors', DistributorController::class);
 
 
 });

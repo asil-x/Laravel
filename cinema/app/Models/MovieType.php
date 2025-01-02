@@ -10,4 +10,6 @@ class MovieType extends Model
     protected $table = 'genres';
 
     protected $primaryKey = 'id_genre';
+
+    public $timestamps = false;
 }
