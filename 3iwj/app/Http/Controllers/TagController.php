@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Tag\CreateTagRequest;
+use App\Http\Requests\Tag\UpdateTagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,7 @@ class TagController extends Controller
             ->select(['id', 'name', 'color_hex'])
             ->latest()
             ->withCount('messages')
-            ->get();
+            ->paginate(10);
 
         return view('tags.index', [
             'tags' => $tags,
@@ -34,7 +36,7 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateTagRequest $request)
     {
         $tag = new Tag();
         $tag->name = $request->get('name');
@@ -57,7 +59,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
         $tag->name = $request->get('name');
         $tag->color_hex = $request->get('color_hex');
@@ -72,7 +74,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-
         return back()->with('success', 'Tag supprimé.');
     }
 }

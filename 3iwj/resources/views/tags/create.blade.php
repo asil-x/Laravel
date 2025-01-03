@@ -5,24 +5,27 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <form method="POST" action="{{ route('tags.store') }}" class="p-6 space-y-2">
-                    @csrf
-
-                    <div>
-                        <x-input-label for="name">Name</x-input-label>
-                        <x-text-input id="name" name="name" />
-                    </div>
-                    <div>
-                        <x-input-label for="color">Color</x-input-label>
-                        <input type="color" id="color" name="color_hex" />
-                    </div>
-
-                    <x-primary-button>Create Tag</x-primary-button>
-                </form>
-            </div>
-        </div>
+    <div class="container max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <section class="grid items-start gap-8">
+            <form class="w-full mx-auto" method="POST" action="{{ route('tags.store') }}">
+                @csrf
+                <div class="mb-4">
+                    <label for="name" class="block mb-2 font-medium text-gray-900">
+                        {{ __('Name') }}</label>
+                    <input type="text" id="name"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        name="name" required />
+                </div>
+                <div class="mb-4">
+                    <label for="color" class="block mb-2 font-medium text-gray-900">
+                        {{ __('Color') }}</label>
+                    <input type="color" id="color" name="color_hex" required />
+                </div>
+                <div class="mb-5">
+                    <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Create Tag</button>
+                </div>
+            </form>
+        </section>
     </div>
 </x-app-layout>
